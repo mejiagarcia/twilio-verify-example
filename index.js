@@ -39,7 +39,7 @@ app.post('/api/devices/token', validateSession, devices.token);
 app.post('/api/devices/register', validateSession, devices.register);
 
 app.post('/api/challenges/update-webhook', challenges.update);
-// app.get('/api/challenges/status', validateSession, challenges.status);
+app.get('/api/challenges/status', validateSession, challenges.status);
 
 app.get('/push-challenge-pending', validateSession, pages.pending);
 app.get('/profile', validateSessionWithMultifactor, pages.profile);

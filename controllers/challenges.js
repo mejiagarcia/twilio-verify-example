@@ -14,4 +14,9 @@ const update = (request, response) => {
   response.status(200).end();
 };
 
-module.exports = { update };
+const status = async (request, response) => {
+  const challenge = await context.challenges.fetch(request.session.user, request.session.challenge.sid);
+  response.json({ status: challenge.status });
+}
+
+module.exports = { update, status };

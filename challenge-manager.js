@@ -9,17 +9,13 @@ class ChallengeManager {
   async create(user, fields) {
     console.log('identity: ', user.id);
 
-    const details = JSON.stringify({
-      message: 'Please approve the login request',
-      fields: fields
-    });
-
     const challenge = await this.client.verify
       .services(process.env.TWILIO_VERIFY_SERVICE_SID)
       .entities(user.id)
       .challenges.create({
-        factorSid: user.factor.sid,
-        details: details
+        'details.message': 'Please approve the login request',
+        'details.fields': fields,
+        factorSid: user.factor.sid
       });
 
     this.challenges.set(challenge.sid, {
@@ -27,6 +23,20 @@ class ChallengeManager {
       socket: undefined
     });
 
+    return challenge;
+  }
+
+  async fetch(user, sid) {
+    const challenge = await this.client.verify
+      .services(process.env.TWILIO_VERIFY_SERVICE_SID)
+      .entities(user.id)
+      .challenges(sid)
+      .fetch();
+    this.challenges.set(challenge.sid, {
+      status: challenge.status,
+      socket: undefined
+    });
+  
     return challenge;
   }
 
