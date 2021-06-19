@@ -15,10 +15,8 @@
     "twilio": "^3.54.1",
     "ua-parser-js": "^0.7.22",
     "uuid": "^8.3.0",
-    "ws": "^7.4.2"
-  },
-  "devDependencies": {
-    "dotenv": "^8.2.0"
+    "ws": "^7.4.2",
+    "dotenv": "^8.6.0"
   },
   "author": "Matthias Damm",
   "license": "MIT"
