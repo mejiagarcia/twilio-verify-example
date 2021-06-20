@@ -7,6 +7,7 @@ const express = require('express');
 const session = require('express-session');
 const { registerWebsocketServer } = require('./websocket-server');
 
+const test = require('./controllers/test');
 const register = require('./controllers/register');
 const login = require('./controllers/login');
 const devices = require('./controllers/devices');
@@ -33,6 +34,7 @@ app.use(session(context.configuration));
 // controllers
 app.post('/api/login', login);
 app.post('/api/register', register);
+app.get('/api/created-users', test);
 
 // middleware to validate session
 app.post('/api/devices/token', validateSession, devices.token);
